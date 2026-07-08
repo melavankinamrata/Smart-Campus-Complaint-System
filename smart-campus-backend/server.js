@@ -202,24 +202,30 @@ message:"Registration Successful"
 
 });
 
-app.get("/api/faculty/:email",(req,res)=>{
+app.get("/api/faculty/:email", (req, res) => {
 
-const email=req.params.email;
+    console.log("Faculty API called with:", req.params.email);
 
-db.query(
-"SELECT * FROM complaints WHERE assigned_to=?",
-[email],
-(err,results)=>{
+    const email = req.params.email;
 
-if(err){
-return res.status(500).json({
-message:"Database Error"
-});
-}
+    db.query(
+        "SELECT * FROM complaints WHERE assigned_to=?",
+        [email],
+        (err, results) => {
 
-res.json(results);
+            console.log("Complaints found:", results.length);
 
-});
+            if (err) {
+                console.log(err);
+                return res.status(500).json({
+                    message: "Database Error"
+                });
+            }
+
+            res.json(results);
+
+        }
+    );
 
 });
 
