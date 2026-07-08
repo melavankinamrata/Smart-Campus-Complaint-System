@@ -48,7 +48,7 @@ localStorage.getItem("user")
 );
 
 console.log("Logged in user:", user);
-alert(user.email);
+
 
 if(!user){
 
@@ -148,13 +148,8 @@ await fetch(
 
 const complaints = await response.json();
 
-alert(JSON.stringify(complaints));
-console.log(complaints);
-console.log("Complaints:", complaints);
-alert(JSON.stringify(complaints));
 
 
-console.log(complaints);
 
 let html = "";
 
