@@ -148,6 +148,8 @@ await fetch(
 
 const complaints =
 await response.json();
+console.log("Complaints:", complaints);
+alert(JSON.stringify(complaints));
 
 
 console.log(complaints);
