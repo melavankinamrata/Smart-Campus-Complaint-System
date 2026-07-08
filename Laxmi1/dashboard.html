@@ -149,6 +149,8 @@ await fetch(
 const complaints =
 await response.json();
 
+console.log(complaints);
+
 let html = "";
 
 if(complaints.length===0){
