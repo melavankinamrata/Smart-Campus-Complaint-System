@@ -109,13 +109,6 @@ body:formData
 
 const data = await response.json();
 
-console.log("Server Response:", data);
-
-if (!response.ok) {
-    alert(data.message);
-    return;
-}
-
 console.log("Saving Ticket:", ticket);
 
 localStorage.setItem("latestTicket", ticket);

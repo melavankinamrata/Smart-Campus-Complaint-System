@@ -44,6 +44,9 @@ res.send("Smart Campus Backend Running");
 });
 
 app.post("/api/complaints", upload.single("photo"), (req, res) => {
+    console.log("========== NEW COMPLAINT ==========");
+console.log(req.body);
+console.log(req.file);
 
 const {
 ticket_id,
@@ -87,7 +90,8 @@ assigned_to,
 photo
 ],
 (err, result) => {
-
+console.log(err);
+console.log(result);
 if(err){
 console.log(err);
 return res.status(500).json({
@@ -97,7 +101,9 @@ message:"Database Error"
 
 res.json({
 message:"Complaint Submitted Successfully"
-});
+})
+console.log("Complaint inserted successfully");
+;
 
 }
 
