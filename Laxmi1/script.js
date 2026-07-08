@@ -99,7 +99,7 @@ formData.append("photo",photo);
 
 try{
 
-const response = await fetch(
+await fetch(
 "https://smart-campus-complaint-system-m717.onrender.com/api/complaints",
 {
 method:"POST",
@@ -107,13 +107,7 @@ body:formData
 }
 );
 
-const data = await response.json();
-
-console.log("Saving Ticket:", ticket);
-
 localStorage.setItem("latestTicket", ticket);
-
-console.log("Saved:", localStorage.getItem("latestTicket"));
 
 window.location.href = "success.html";
 
@@ -122,50 +116,58 @@ catch(error){
 
 console.log(error);
 
-alert(
-"Error submitting complaint"
-);
+alert("Error submitting complaint");
 
 }
 
 });
 
 }
-async function loadStats() {
 
-    try {
+/* ================= FAQ ================= */
 
-        const response = await fetch("http://localhost:5000/api/stats");
-
-        const data = await response.json();
-
-        document.getElementById("totalComplaints").innerText = data.total;
-        document.getElementById("resolvedComplaints").innerText = data.resolved;
-
-    } catch (error) {
-        console.log(error);
-    }
-
-}
-
-if (document.getElementById("totalComplaints")) {
-    loadStats();
-}
 const questions = document.querySelectorAll(".faq-question");
 
-questions.forEach(question => {
+if(questions.length){
 
-question.addEventListener("click", function(){
+questions.forEach(question=>{
 
-const answer = this.nextElementSibling;
+question.addEventListener("click",()=>{
 
-if(answer.style.display === "block"){
-answer.style.display = "none";
+const answer = question.nextElementSibling;
+const icon = question.querySelector(".icon");
+
+document.querySelectorAll(".faq-answer").forEach(item=>{
+
+if(item!==answer){
+item.style.display="none";
+}
+
+});
+
+document.querySelectorAll(".icon").forEach(item=>{
+
+if(item!==icon){
+item.textContent="+";
+}
+
+});
+
+if(answer.style.display==="block"){
+
+answer.style.display="none";
+icon.textContent="+";
+
 }
 else{
-answer.style.display = "block";
+
+answer.style.display="block";
+icon.textContent="−";
+
 }
 
 });
 
 });
+
+}
