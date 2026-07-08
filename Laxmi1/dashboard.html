@@ -146,8 +146,10 @@ await fetch(
 `https://smart-campus-complaint-system-m717.onrender.com/api/faculty/${user.email}`
 );
 
-const complaints =
-await response.json();
+const complaints = await response.json();
+
+alert(JSON.stringify(complaints));
+console.log(complaints);
 console.log("Complaints:", complaints);
 alert(JSON.stringify(complaints));
 
@@ -268,6 +270,7 @@ Resolved
 
 }
 console.log(html);
+alert(html);
 document.getElementById(
 "complaints"
 ).innerHTML = html;
