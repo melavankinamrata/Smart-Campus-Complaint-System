@@ -15,7 +15,36 @@
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 </head>
+<script>
 
+async function loadStats() {
+
+try {
+
+const response = await fetch(
+"https://smart-campus-complaint-system-m717.onrender.com/api/stats"
+);
+
+const data = await response.json();
+
+document.getElementById("totalComplaints").innerText =
+data.total;
+
+document.getElementById("resolvedComplaints").innerText =
+data.resolved;
+
+}
+catch(error) {
+
+console.log("Stats Error:", error);
+
+}
+
+}
+
+loadStats();
+
+</script>
 <body>
 
 <div class="particles"></div>
@@ -76,21 +105,7 @@ Track Report
 
 </section>
 
-<section class="stats">
 
-<div class="card">
-<i class="fa-solid fa-file-circle-check"></i>
-<h2 id="totalComplaints">0</h2>
-<p>Total Complaints Raised</p>
-</div>
-
-<div class="card">
-<i class="fa-solid fa-check-circle"></i>
-<h2 id="resolvedComplaints">0</h2>
-<p>Resolved Complaints</p>
-</div>
-
-</section>
 
 <section class="features">
 
