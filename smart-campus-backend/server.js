@@ -27,8 +27,14 @@ Date.now() + path.extname(file.originalname)
 
 });
 
+const fs = require("fs");
+
+if (!fs.existsSync("uploads")) {
+    fs.mkdirSync("uploads", { recursive: true });
+}
+
 const upload = multer({
-storage: storage
+    storage: storage
 });
 
 app.use("/uploads",express.static("uploads"));
