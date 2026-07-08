@@ -100,7 +100,7 @@ formData.append("photo",photo);
 try{
 
 const response = await fetch(
-"http://localhost:5000/api/complaints",
+"https://smart-campus-complaint-system-m717.onrender.com/api/complaints",
 {
 method:"POST",
 body:formData
