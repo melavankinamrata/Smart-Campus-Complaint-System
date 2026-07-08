@@ -501,3 +501,37 @@ box-shadow:
 
 color:white !important;
 }
+.faq{
+max-width:900px;
+margin:60px auto;
+padding:20px;
+}
+
+.faq h2{
+text-align:center;
+margin-bottom:30px;
+}
+
+.faq-item{
+margin-bottom:15px;
+}
+
+.faq-question{
+width:100%;
+padding:15px;
+font-size:16px;
+text-align:left;
+cursor:pointer;
+border:none;
+border-radius:10px;
+background:#1e293b;
+color:white;
+}
+
+.faq-answer{
+display:none;
+padding:15px;
+background:#2d3748;
+color:white;
+border-radius:0 0 10px 10px;
+}
