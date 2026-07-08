@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Track Complaint</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+<body>
+
+<nav>
+
+<div class="logo">
+<i class="fa-solid fa-building-columns"></i>
+CollegeCare
+</div>
+
+<div class="nav-links">
+<a href="index.html">Home</a>
+<a href="complaint.html">Complaint</a>
+<a href="track.html">Track</a>
+<a href="login.html">Login</a>
+</div>
+
+</nav>
+
+<div class="container">
+
+<h1 style="text-align:center;">
+🔍 Track Complaint
+</h1>
+
+<br>
+
+<input
+type="text"
+id="ticketInput"
+placeholder="Enter Ticket ID">
+
+<button onclick="trackComplaint()">
+Track Complaint
+</button>
+
+<br><br>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+
+async function trackComplaint(){
+
+const ticket =
+document.getElementById(
+"ticketInput"
+).value;
+
+const response =
+await fetch(
+`http://localhost:5000/api/complaints/${ticket}`
+);
+
+const data =
+await response.json();
+
+if(response.ok){
+
+document.getElementById(
+"result"
+).innerHTML = `
+
+<div class="card">
+
+<h2>${data.ticket_id}</h2>
+
+<p>
+Department :
+${data.department}
+</p>
+
+<p>
+Issue :
+${data.category}
+</p>
+
+<p>
+Priority :
+${data.priority}
+</p>
+
+<p>
+Status :
+${data.status}
+</p>
+
+<p>
+Assigned To :
+${data.assigned_to}
+</p>
+
+${
+data.photo
+?
+`
+<p><b>Uploaded Image :</b></p>
+
+<img
+src="http://localhost:5000/uploads/${data.photo}"
+style="
+width:300px;
+border-radius:10px;
+margin-top:10px;
+border:2px solid #ddd;
+">
+`
+:
+`
+<p><b>No Image Uploaded</b></p>
+`
+}
+
+</div>
+
+`;
+
+}
+else{
+
+document.getElementById(
+"result"
+).innerHTML =
+
+"<h2>❌ Ticket Not Found</h2>";
+
+}
+
+}
+
+</script>
+
+</body>
+</html>

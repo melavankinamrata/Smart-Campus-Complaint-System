@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Faculty Dashboard</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+
+<div class="logo">
+CollegeCare
+</div>
+
+<div class="nav-links">
+<a href="#" onclick="logout()">
+Logout
+</a>
+</div>
+
+</nav>
+
+<div class="container">
+
+<h1 style="text-align:center;">
+Faculty Dashboard
+</h1>
+
+<br>
+
+<div id="welcome"></div>
+
+<br>
+
+<div id="stats"></div>
+
+<br>
+
+<div id="complaints"></div>
+
+</div>
+
+<script>
+
+const user =
+JSON.parse(
+localStorage.getItem("user")
+);
+
+if(!user){
+
+window.location.href =
+"login.html";
+
+}
+
+document.getElementById(
+"welcome"
+).innerHTML = `
+
+<div class="card">
+
+<h3>
+Welcome ${user.name}
+</h3>
+
+<p>
+Role : ${user.role}
+</p>
+
+<p>
+Department : ${user.department}
+</p>
+
+<p>
+Email : ${user.email}
+</p>
+
+</div>
+
+`;
+
+loadStats();
+loadComplaints();
+
+async function loadStats(){
+
+try{
+
+const response = await fetch(
+"http://localhost:5000/api/stats"
+);
+
+const data = await response.json();
+
+document.getElementById("stats").innerHTML = `
+
+<div style="
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+justify-content:center;
+">
+
+<div class="card" style="width:180px;text-align:center;">
+<h3>Total</h3>
+<h1>${data.total}</h1>
+</div>
+
+<div class="card" style="width:180px;text-align:center;">
+<h3>Pending</h3>
+<h1>${data.pending}</h1>
+</div>
+
+<div class="card" style="width:180px;text-align:center;">
+<h3>In Progress</h3>
+<h1>${data.progress}</h1>
+</div>
+
+<div class="card" style="width:180px;text-align:center;">
+<h3>Resolved</h3>
+<h1>${data.resolved}</h1>
+</div>
+
+</div>
+
+`;
+
+}
+catch(error){
+
+console.log(error);
+
+}
+
+}
+async function loadComplaints(){
+
+try{
+
+const response =
+await fetch(
+`http://localhost:5000/api/faculty/${user.email}`
+);
+
+const complaints =
+await response.json();
+
+let html = "";
+
+if(complaints.length===0){
+
+html = `
+
+<div class="card">
+
+<h3>
+No Complaints Assigned
+</h3>
+
+</div>
+
+`;
+
+}
+else{
+
+complaints.forEach(c => {
+
+html += `
+
+<div class="card">
+
+<h2>
+${c.ticket_id}
+</h2>
+
+<p>
+Department :
+${c.department}
+</p>
+
+<p>
+Issue :
+${c.category}
+</p>
+
+<p>
+Priority :
+${c.priority}
+</p>
+
+<p>
+Room :
+${c.room}
+</p>
+
+<p>
+Description :
+${c.description}
+</p>
+
+${
+c.photo
+?
+`
+<p><b>Uploaded Image:</b></p>
+
+<img
+src="http://localhost:5000/uploads/${c.photo}"
+style="
+width:220px;
+border-radius:10px;
+margin-bottom:15px;
+border:2px solid #ddd;
+">
+`
+:
+`<p><i>No Image Uploaded</i></p>`
+}
+
+<p>
+Current Status :
+<b>${c.status}</b>
+</p>
+
+<select
+onchange="updateStatus(
+'${c.ticket_id}',
+this.value
+)">
+
+<option
+value="Pending"
+${c.status==="Pending"?"selected":""}>
+Pending
+</option>
+
+<option
+value="In Progress"
+${c.status==="In Progress"?"selected":""}>
+In Progress
+</option>
+
+<option
+value="Resolved"
+${c.status==="Resolved"?"selected":""}>
+Resolved
+</option>
+
+</select>
+
+</div>
+
+<br>
+
+`;
+
+});
+
+}
+
+document.getElementById(
+"complaints"
+).innerHTML = html;
+
+}
+catch(error){
+
+alert(
+"Unable to Load Complaints"
+);
+
+}
+
+}
+
+async function updateStatus(
+ticket,
+status
+){
+
+try{
+
+const response =
+await fetch(
+`http://localhost:5000/api/complaints/${ticket}`,
+{
+method:"PUT",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+status
+})
+}
+);
+
+const data =
+await response.json();
+
+alert(
+data.message
+);
+
+loadComplaints();
+
+}
+catch(error){
+
+alert(
+"Failed to Update Status"
+);
+
+}
+
+}
+
+function logout(){
+
+localStorage.removeItem(
+"user"
+);
+
+window.location.href =
+"login.html";
+
+}
+
+</script>
+
+</body>
+</html>

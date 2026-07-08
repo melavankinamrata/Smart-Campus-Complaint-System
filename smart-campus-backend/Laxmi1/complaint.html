@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Raise Complaint</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+<body>
+
+<nav>
+
+<div class="logo">
+<i class="fa-solid fa-building-columns"></i>
+CollegeCare
+</div>
+
+<div class="nav-links">
+<a href="index.html">Home</a>
+<a href="complaint.html">Complaint</a>
+<a href="track.html">Track</a>
+<a href="admin.html">Admin</a>
+</div>
+
+</nav>
+
+<div class="container">
+
+<h1 style="text-align:center;margin-bottom:20px;">
+📢 Raise a Complaint
+</h1>
+
+<form id="complaintForm">
+
+
+
+<label>Department</label>
+
+<select id="department" required>
+
+<option value="">
+Select Department
+</option>
+
+<option value="CS">
+Computer Science
+</option>
+
+<option value="EC">
+Electronics
+</option>
+
+<option value="EEE">
+Electrical
+</option>
+
+<option value="AIML">
+AIML
+</option>
+
+<option value="ME">
+Mechanical
+</option>
+
+<option value="AE">
+Aeronautical
+</option>
+
+<option value="ARCH">
+Architecture
+</option>
+
+</select>
+
+<label>Issue Category</label>
+
+<select id="category" required>
+
+<option value="">
+Select Issue
+</option>
+
+<option value="Water">
+Water
+</option>
+
+<option value="Electricity">
+Electricity
+</option>
+
+<option value="Cleanliness">
+Cleanliness
+</option>
+
+<option value="Discipline">
+Discipline
+</option>
+
+<option value="Infrastructure">
+Infrastructure
+</option>
+
+<option value="Internet">
+Internet
+</option>
+
+</select>
+
+<label>Priority</label>
+
+<select id="priority">
+
+<option>Low</option>
+<option>Medium</option>
+<option>High</option>
+
+</select>
+
+<label>Room / Lab Number</label>
+
+<input
+type="text"
+id="room"
+placeholder="Example: CSE Lab 2">
+
+<label>Complaint Description</label>
+
+<textarea
+id="description"
+rows="5"
+placeholder="Describe the issue..."
+required>
+</textarea>
+
+
+<label>
+📷 Upload Photo (Optional)
+</label>
+
+<input
+type="file"
+id="photo"
+accept="image/*">
+<button type="submit">
+Submit Complaint
+</button>
+
+</form>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

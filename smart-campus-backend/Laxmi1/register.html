@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Faculty Registration</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+<h1 style="text-align:center;">
+Faculty Registration
+</h1>
+
+<br>
+
+<input
+type="text"
+id="name"
+placeholder="Full Name">
+
+<input
+type="email"
+id="email"
+placeholder="Email">
+
+<input
+type="password"
+id="password"
+placeholder="Password">
+
+<select id="role">
+
+<option value="">
+Select Role
+</option>
+
+<option value="hod">
+HOD
+</option>
+
+<option value="dean">
+Dean
+</option>
+
+<option value="principal">
+Principal
+</option>
+
+</select>
+
+<select id="department">
+
+<option value="">
+Select Department
+</option>
+
+<option value="CS">
+Computer Science
+</option>
+
+<option value="EC">
+Electronics
+</option>
+
+<option value="EEE">
+Electrical
+</option>
+
+<option value="AIML">
+AIML
+</option>
+
+<option value="ME">
+Mechanical
+</option>
+
+<option value="AE">
+Aeronautical
+</option>
+
+<option value="ARCH">
+Architecture
+</option>
+
+</select>
+
+<input
+type="text"
+id="code"
+placeholder="Registration Code">
+
+<button onclick="register()">
+Register
+</button>
+
+<br><br>
+
+<p style="text-align:center;">
+Already have an account?
+<a href="login.html">
+Login Here
+</a>
+</p>
+
+</div>
+
+<script>
+
+async function register(){
+
+const name =
+document.getElementById("name").value;
+
+const email =
+document.getElementById("email").value;
+
+const password =
+document.getElementById("password").value;
+
+const role =
+document.getElementById("role").value;
+
+const department =
+document.getElementById("department").value;
+
+const code =
+document.getElementById("code").value;
+
+try{
+
+const response =
+await fetch(
+"http://localhost:5000/api/register",
+{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+name,
+email,
+password,
+role,
+department,
+code
+})
+}
+);
+
+const data =
+await response.json();
+
+alert(data.message);
+
+if(response.ok){
+
+window.location.href =
+"login.html";
+
+}
+
+}
+catch(error){
+
+alert(
+"Server Not Running"
+);
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
