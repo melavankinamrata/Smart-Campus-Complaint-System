@@ -91,7 +91,7 @@ async function loadStats(){
 try{
 
 const response = await fetch(
-"http://localhost:5000/api/stats"
+"https://smart-campus-complaint-system-m717.onrender.com/api/stats"
 );
 
 const data = await response.json();
@@ -210,7 +210,7 @@ c.photo
 <p><b>Uploaded Image:</b></p>
 
 <img
-src="http://localhost:5000/uploads/${c.photo}"
+src="https://smart-campus-complaint-system-m717.onrender.com/uploads/${c.photo}"
 style="
 width:220px;
 border-radius:10px;
