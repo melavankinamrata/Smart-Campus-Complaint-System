@@ -131,3 +131,23 @@ alert(
 });
 
 }
+async function loadStats() {
+
+    try {
+
+        const response = await fetch("http://localhost:5000/api/stats");
+
+        const data = await response.json();
+
+        document.getElementById("totalComplaints").innerText = data.total;
+        document.getElementById("resolvedComplaints").innerText = data.resolved;
+
+    } catch (error) {
+        console.log(error);
+    }
+
+}
+
+if (document.getElementById("totalComplaints")) {
+    loadStats();
+}
