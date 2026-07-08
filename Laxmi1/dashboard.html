@@ -149,6 +149,7 @@ await fetch(
 const complaints =
 await response.json();
 
+
 console.log(complaints);
 
 let html = "";
@@ -264,7 +265,7 @@ Resolved
 });
 
 }
-
+console.log(html);
 document.getElementById(
 "complaints"
 ).innerHTML = html;
